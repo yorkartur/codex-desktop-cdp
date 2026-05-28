@@ -10,9 +10,11 @@ local web app -> local backend -> Codex Desktop CDP -> visible Codex chat
 
 Your app runs in the Codex in-app browser. When the user clicks a button, selects text, or triggers an action, your local backend sends a structured prompt into the visible Codex conversation. From there Codex can use the current project, files, terminal, browser tools, approvals, and skills.
 
-This is not an official Codex plugin API. It is an unstable, experimental local bridge for building your own native-like Codex workflows.
-
-Do not use this for production apps. The bridge depends on local CDP access and Codex Desktop UI structure, so it can break when Codex Desktop, OpenCLI, Electron, or macOS behavior changes.
+> ⚠️ **Experimental only**
+>
+> This is not an official Codex plugin API. It is an unstable local bridge for building native-like Codex workflow prototypes.
+>
+> Do not use this for production apps. The bridge depends on local CDP access and Codex Desktop UI structure, so it can break when Codex Desktop, OpenCLI, Electron, or macOS behavior changes.
 
 ## Tested Setup
 
@@ -28,7 +30,7 @@ The examples use the macOS app-bundle executable:
 /Applications/Codex.app/Contents/MacOS/Codex --remote-debugging-port=9222
 ```
 
-That launch path can be brittle across Codex Desktop or macOS installs. If it fails, quit Codex, relaunch with the command above, then verify the CDP endpoint before debugging your app.
+That is the default macOS install path. If Codex Desktop is installed somewhere else on your machine, use the matching `Codex` executable path with the same `--remote-debugging-port=9222` flag, then verify the CDP endpoint before debugging your app.
 
 ## Recommended Setup
 
@@ -73,7 +75,7 @@ Quit Codex Desktop, then relaunch it with a local CDP port:
 /Applications/Codex.app/Contents/MacOS/Codex --remote-debugging-port=9222
 ```
 
-This command is the macOS-tested path. Other platforms have not been tested in this repo.
+This command is the macOS-tested default path. If your Codex app is installed somewhere else, use that local app-bundle executable path instead. Other platforms have not been tested in this repo.
 
 Point OpenCLI at Codex:
 
@@ -212,32 +214,9 @@ Keep this skill local to the project. It should not explain the UI or encode pro
 
 Your browser UI should not spawn local processes directly. Use a local backend.
 
-Critical send-path rule:
-Do not use `opencli codex send` as the app's primary send mechanism when the app runs inside the Codex in-app browser.
+The short rule: the backend must target the Codex Desktop shell CDP page, not the local app page.
 
-Reason:
-The local app's textarea may be the focused element, so `opencli codex send` can paste the prompt back into the app instead of the Codex chat composer.
-
-Required implementation:
-
-- Use OpenCLI only as an optional smoke test.
-- For the real app handoff, connect directly to the Codex Desktop CDP endpoint:
-  `OPENCLI_CDP_ENDPOINT=http://127.0.0.1:9222`
-  or
-  `CODEX_CDP_ENDPOINT=http://127.0.0.1:9222`
-- Fetch `${endpoint}/json/list`.
-- Select the Codex Desktop shell target where:
-  - `target.type === "page"`
-  - `target.url.startsWith("app://")`
-  - `target.webSocketDebuggerUrl` exists
-- Never evaluate against the local app URL target.
-- If `CODEX_TARGET_THREAD_ID` or `?threadId=...` is configured, first focus:
-  `open "codex://threads/<thread-id>"`
-- Through CDP, focus the visible bottom Codex composer, usually a `.ProseMirror[contenteditable="true"]` near the bottom of the window.
-- Insert the structured prompt using `Input.insertText`.
-- Verify the composer contains text.
-- Submit with `Input.dispatchKeyEvent` for Enter.
-- If no thread id is configured, clearly warn that the app will send to the currently visible Codex composer.
+See [Core backend call](docs/core-backend-call.md) for the send-path details.
 
 ## What To Send
 
@@ -305,6 +284,7 @@ Keep this local.
 The README is the canonical guide. Extra notes are intentionally small:
 
 - [Troubleshooting](docs/troubleshooting.md)
+- [Core backend call](docs/core-backend-call.md)
 - [Security and boundaries](docs/security-and-boundaries.md)
 - [Use cases](docs/use-cases.md)
 - [Sources](docs/sources.md)

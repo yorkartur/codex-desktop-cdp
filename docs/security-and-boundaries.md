@@ -1,8 +1,10 @@
 # Security And Boundaries
 
-This technique gives a local process the ability to operate your visible Codex Desktop UI. Treat it with care.
-
-This is unstable and experimental. It is not recommended for production apps, unattended agents, multi-user services, or any workflow that needs a stable integration contract.
+> ⚠️ **Experimental only**
+>
+> This technique gives a local process the ability to operate your visible Codex Desktop UI. Treat it with care.
+>
+> This is unstable and experimental. It is not recommended for production apps, unattended agents, multi-user services, or any workflow that needs a stable integration contract.
 
 ## Safe Defaults
 
