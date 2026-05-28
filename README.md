@@ -10,13 +10,19 @@ Build local apps that feel native inside Codex Desktop.
 
 This repo is not meant to be an app you install. It is a small pattern you can copy so you can build your own local interface and connect it to Codex Desktop.
 
-The trick is simple:
+The pattern is:
 
 ```text
-local web app -> local backend -> Codex Desktop CDP -> visible Codex chat
+Codex Desktop app
+  -> Codex in-app browser opens your local web app
+  -> your local backend receives the user's action
+  -> backend uses Codex Desktop CDP
+  -> structured prompt lands in the visible Codex chat
 ```
 
-Your app runs in the Codex in-app browser. When the user clicks a button, selects text, or triggers an action, your local backend sends a structured prompt into the visible Codex conversation. From there Codex can use the current project, files, terminal, browser tools, approvals, and skills.
+Codex Desktop is an Electron app. When launched with a remote debugging port, OpenCLI can help discover and smoke-test the CDP connection. For real app handoffs, your backend should connect to the Codex Desktop CDP endpoint, target the Codex shell window, and insert the prompt into the visible chat composer.
+
+Your local app still runs as an ordinary web app. The native-like part is that it opens inside Codex, sends structured context into the active Codex conversation, and then Codex can use the current project, files, terminal, browser tools, approvals, and skills.
 
 ## Tested Setup
 
