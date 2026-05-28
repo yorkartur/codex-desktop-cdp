@@ -8,6 +8,8 @@
 
 Build local apps that feel native inside Codex Desktop.
 
+This repo is not meant to be an app you install. It is a small pattern you can copy so you can build your own local interface and connect it to Codex Desktop.
+
 The trick is simple:
 
 ```text
@@ -47,21 +49,22 @@ The best setup has:
 
 The app should not only send text. It should show the user which directory it is running from, list the local skills it can find, classify the user's action, and send enough context for Codex to choose or invoke the right skill.
 
-## Why This Is Useful
+## What Makes A Use Case Codex-Native?
 
 Chat is not always the best UI.
 
-This pattern is mainly for human-in-the-loop tools: interfaces where a person is reading, writing, selecting, approving, steering, or triggering Codex actions from a richer UI than chat.
+A good use case has a human operating a focused interface while Codex handles the reasoning or action behind it.
 
-Good fits:
+Good examples:
 
 - read a paper and send selected passages to Codex,
 - edit Markdown and run writing skills on selected text,
-- browse a local knowledge base or Second Brain and send structured context to Codex,
-- use a project dashboard where a human reviews state and asks Codex to run targeted actions,
-- run a human-operated game or Dungeon Master interface where the user can trigger Codex-generated events, NPCs, summaries, or consequences.
+- browse a local knowledge base and send structured context to Codex,
+- run a human-operated game or Dungeon Master interface where the user triggers Codex-generated events, NPCs, summaries, or consequences.
 
-This is less useful for fully automatic background workflows. If nobody needs to inspect, select, approve, or steer from a UI, a script, skill, CLI, or backend integration is usually simpler.
+The available examples in this repo are Reading Companion and Writing Companion. They are meant as reference patterns, not finished products to install.
+
+If nobody needs to inspect, select, approve, or steer from a UI, a script, skill, CLI, or backend integration is usually simpler.
 
 The app handles the interface. Codex handles the reasoning and actions.
 
