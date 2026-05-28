@@ -1,5 +1,11 @@
 # Codex Desktop CDP
 
+> ⚠️ **Experimental only**
+>
+> This is not an official Codex plugin API. It is an unstable local bridge for building native-like Codex workflow prototypes.
+>
+> Do not use this for production apps. The bridge depends on local CDP access and Codex Desktop UI structure, so it can break when Codex Desktop, OpenCLI, Electron, or macOS behavior changes.
+
 Build local apps that feel native inside Codex Desktop.
 
 The trick is simple:
@@ -9,12 +15,6 @@ local web app -> local backend -> Codex Desktop CDP -> visible Codex chat
 ```
 
 Your app runs in the Codex in-app browser. When the user clicks a button, selects text, or triggers an action, your local backend sends a structured prompt into the visible Codex conversation. From there Codex can use the current project, files, terminal, browser tools, approvals, and skills.
-
-> ⚠️ **Experimental only**
->
-> This is not an official Codex plugin API. It is an unstable local bridge for building native-like Codex workflow prototypes.
->
-> Do not use this for production apps. The bridge depends on local CDP access and Codex Desktop UI structure, so it can break when Codex Desktop, OpenCLI, Electron, or macOS behavior changes.
 
 ## Tested Setup
 
@@ -261,11 +261,15 @@ That structure is what makes the app feel like part of Codex instead of a generi
 
 Pattern: `source -> selected passage -> note -> Codex`
 
+![Reading Companion sending a captured book note to Codex](assets/reading-companion-capture.jpg)
+
 Use this when the user is reading a paper, book, article, or local document. The local app is good at selection and annotation. Codex is good at connecting the passage to a knowledge base, project, or skill.
 
 ### Writing Companion
 
 Pattern: `draft -> selected text -> skill/action -> Codex`
+
+![Writing Companion selecting text and launching a Codex skill](assets/writing-companion-selector.jpg)
 
 Use this when the user is writing and wants to run a Codex skill against part of the draft: critique, rewrite, find weak arguments, preserve voice, or make a controlled edit.
 
