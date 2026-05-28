@@ -51,13 +51,17 @@ The app should not only send text. It should show the user which directory it is
 
 Chat is not always the best UI.
 
-Sometimes you want a tiny local interface for a specific workflow:
+This pattern is mainly for human-in-the-loop tools: interfaces where a person is reading, writing, selecting, approving, steering, or triggering Codex actions from a richer UI than chat.
+
+Good fits:
 
 - read a paper and send selected passages to Codex,
 - edit Markdown and run writing skills on selected text,
-- build a project dashboard that can ask Codex to run commands,
-- create a skill launcher for repeated project actions,
-- connect a local knowledge base or Second Brain to Codex.
+- browse a local knowledge base or Second Brain and send structured context to Codex,
+- use a project dashboard where a human reviews state and asks Codex to run targeted actions,
+- run a human-operated game or Dungeon Master interface where the user can trigger Codex-generated events, NPCs, summaries, or consequences.
+
+This is less useful for fully automatic background workflows. If nobody needs to inspect, select, approve, or steer from a UI, a script, skill, CLI, or backend integration is usually simpler.
 
 The app handles the interface. Codex handles the reasoning and actions.
 
@@ -272,6 +276,8 @@ Pattern: `draft -> selected text -> skill/action -> Codex`
 ![Writing Companion selecting text and launching a Codex skill](assets/writing-companion-selector.jpg)
 
 Use this when the user is writing and wants to run a Codex skill against part of the draft: critique, rewrite, find weak arguments, preserve voice, or make a controlled edit.
+
+For writing tools, a useful variant is to let Codex edit the local Markdown file directly after the user approves the write-back. The app can then watch the file from the backend, or use a frontend stack like React to refresh when the file changes, so the editor updates live without inventing a separate sync model.
 
 ## Safety
 
