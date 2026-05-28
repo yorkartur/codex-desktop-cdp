@@ -302,13 +302,12 @@ Keep this local.
 
 ## More Notes
 
-The old detailed notes are still useful if you want the deeper mechanics:
+The README is the canonical guide. Extra notes are intentionally small:
 
-- [Manual](docs/manual.md)
-- [Architecture](docs/architecture.md)
-- [App Server vs CDP](docs/app-server-vs-cdp.md)
-- [Thread Targeting](docs/thread-targeting.md)
 - [Troubleshooting](docs/troubleshooting.md)
+- [Security and boundaries](docs/security-and-boundaries.md)
+- [Use cases](docs/use-cases.md)
+- [Sources](docs/sources.md)
 
 But the main idea is enough to start:
 
