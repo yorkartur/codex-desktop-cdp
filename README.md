@@ -1,32 +1,32 @@
-# Codex Desktop CDP
+# Codex In ChatGPT App CDP
 
 > ⚠️ **Experimental only**
 >
 > This is not an official Codex plugin API. It is an unstable local bridge for building native-like Codex workflow prototypes.
 >
-> Do not use this for production apps. The bridge depends on local CDP access and Codex Desktop UI structure, so it can break when Codex Desktop, OpenCLI, Electron, or macOS behavior changes.
+> Do not use this for production apps. The bridge depends on local CDP access and the ChatGPT app's Codex UI structure, so it can break when ChatGPT, Codex, OpenCLI, Electron, or macOS behavior changes.
 
-Build local apps that feel native inside Codex Desktop.
+Build local apps that feel native inside Codex running in the ChatGPT desktop app.
 
-This repo is not meant to be an app you install. It is a small pattern you can copy so you can build your own local interface and connect it to Codex Desktop.
+This repo is not meant to be an app you install. It is a small pattern you can copy so you can build your own local interface and connect it to Codex in the ChatGPT desktop app.
 
 The pattern is:
 
 ```text
-Codex Desktop app
+ChatGPT desktop app (Codex workspace)
   -> Codex in-app browser opens your local web app
   -> your local backend receives the user's action
-  -> backend uses Codex Desktop CDP
+  -> backend uses the ChatGPT app CDP endpoint
   -> structured prompt lands in the visible Codex chat
 ```
 
-Codex Desktop is an Electron app. When launched with a remote debugging port, OpenCLI can help discover and smoke-test the CDP connection. For real app handoffs, your backend should connect to the Codex Desktop CDP endpoint, target the Codex shell window, and insert the prompt into the visible chat composer.
+The ChatGPT desktop app is an Electron app. When launched with a remote debugging port, OpenCLI can help discover and smoke-test the CDP connection. For real app handoffs, your backend should connect to the ChatGPT app CDP endpoint, target the Codex shell window, and insert the prompt into the visible chat composer.
 
 Your local app still runs as an ordinary web app. The native-like part is that it opens inside Codex, sends structured context into the active Codex conversation, and then Codex can use the current project, files, terminal, browser tools, approvals, and skills.
 
 ## Tested Setup
 
-This repo has only been tested on macOS with Codex Desktop.
+This repo has only been tested on macOS with Codex in the ChatGPT desktop app.
 
 Recommended Codex thread setting:
 
@@ -35,10 +35,10 @@ Recommended Codex thread setting:
 The examples use the macOS app-bundle executable:
 
 ```sh
-/Applications/Codex.app/Contents/MacOS/Codex --remote-debugging-port=9222
+/Applications/ChatGPT.app/Contents/MacOS/ChatGPT --remote-debugging-port=9222
 ```
 
-That is the default macOS install path. If Codex Desktop is installed somewhere else on your machine, use the matching `Codex` executable path with the same `--remote-debugging-port=9222` flag, then verify the CDP endpoint before debugging your app.
+That is the current default macOS install path. If ChatGPT is installed somewhere else on your machine, use the matching `ChatGPT` app-bundle executable path with the same `--remote-debugging-port=9222` flag, then verify the CDP endpoint before debugging your app. The deep-link scheme remains `codex://`, and the OpenCLI adapter remains `opencli codex`.
 
 ## Recommended Setup
 
@@ -82,13 +82,13 @@ Optional OpenCLI smoke test:
 npm install -g @jackwener/opencli
 ```
 
-Quit Codex Desktop, then relaunch it with a local CDP port:
+Quit ChatGPT completely, then relaunch it with a local CDP port:
 
 ```sh
-/Applications/Codex.app/Contents/MacOS/Codex --remote-debugging-port=9222
+/Applications/ChatGPT.app/Contents/MacOS/ChatGPT --remote-debugging-port=9222
 ```
 
-This command is the macOS-tested default path. If your Codex app is installed somewhere else, use that local app-bundle executable path instead. Other platforms have not been tested in this repo.
+This command is the macOS-tested default path. If ChatGPT is installed somewhere else, use that local app-bundle executable path instead. Other platforms have not been tested in this repo.
 
 Point OpenCLI at Codex:
 
@@ -117,7 +117,7 @@ https://github.com/yorkartur/codex-desktop-cdp
 
 Create the smallest local web app in this project that proves this flow:
 
-local web app -> local backend -> Codex Desktop CDP -> visible Codex chat
+local web app -> local backend -> ChatGPT app CDP -> visible Codex chat
 
 Requirements:
 - runs in the Codex in-app browser
@@ -130,8 +130,8 @@ Requirements:
 
 Assume:
 - macOS only tested
-- Codex Desktop launched with:
-  `/Applications/Codex.app/Contents/MacOS/Codex --remote-debugging-port=9222`
+- ChatGPT desktop app launched with:
+  `/Applications/ChatGPT.app/Contents/MacOS/ChatGPT --remote-debugging-port=9222`
 - receiving Codex thread uses `GPT-5.5 Medium`
 
 Critical send-path rule:

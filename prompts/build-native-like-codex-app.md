@@ -8,7 +8,7 @@ https://github.com/yorkartur/codex-desktop-cdp
 
 Create the smallest local web app in this project that proves this flow:
 
-local web app -> local backend -> Codex Desktop CDP -> visible Codex chat
+local web app -> local backend -> ChatGPT app CDP -> visible Codex chat
 
 Requirements:
 - runs in the Codex in-app browser
@@ -21,8 +21,8 @@ Requirements:
 
 Assume:
 - macOS only tested
-- Codex Desktop launched with:
-  `/Applications/Codex.app/Contents/MacOS/Codex --remote-debugging-port=9222`
+- ChatGPT desktop app launched with:
+  `/Applications/ChatGPT.app/Contents/MacOS/ChatGPT --remote-debugging-port=9222`
 - receiving Codex thread uses `GPT-5.5 Medium`
 
 Critical send-path rule:

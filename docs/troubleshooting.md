@@ -2,14 +2,14 @@
 
 ## `CDP not reachable`
 
-Codex Desktop was probably launched normally, the port does not match, or the macOS app-bundle launch path is different on your machine.
+ChatGPT was probably launched normally, the port does not match, or the macOS app-bundle launch path is different on your machine.
 
-This repo has only been tested on macOS with Codex Desktop launched through the app-bundle executable.
+This repo has only been tested on macOS with ChatGPT launched through the app-bundle executable and its Codex workspace visible.
 
 Fix:
 
 ```sh
-/Applications/Codex.app/Contents/MacOS/Codex --remote-debugging-port=9222
+/Applications/ChatGPT.app/Contents/MacOS/ChatGPT --remote-debugging-port=9222
 export OPENCLI_CDP_ENDPOINT="http://127.0.0.1:9222"
 opencli codex status
 ```
@@ -24,7 +24,7 @@ curl http://127.0.0.1:9222/json/version
 
 Check:
 
-- Is Codex Desktop visible?
+- Is the ChatGPT desktop app visible with a Codex conversation open?
 - Is a conversation open?
 - Is the composer enabled?
 - Is another modal or review panel focused?
