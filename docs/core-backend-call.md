@@ -13,12 +13,12 @@ The local app's textarea may be the focused element, so `opencli codex send` can
 ## Required Implementation
 
 - Use OpenCLI only as an optional smoke test.
-- For the real app handoff, connect directly to the Codex Desktop CDP endpoint:
+- For the real app handoff, connect directly to the ChatGPT desktop app CDP endpoint:
   `OPENCLI_CDP_ENDPOINT=http://127.0.0.1:9222`
   or
   `CODEX_CDP_ENDPOINT=http://127.0.0.1:9222`
 - Fetch `${endpoint}/json/list`.
-- Select the Codex Desktop shell target where:
+- Select the Codex shell target inside ChatGPT where:
   - `target.type === "page"`
   - `target.url.startsWith("app://")`
   - `target.webSocketDebuggerUrl` exists

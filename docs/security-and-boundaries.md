@@ -44,4 +44,4 @@ If a malicious local process can reach your CDP endpoint, it may be able to insp
 
 That is why the bridge should be used only on trusted machines and only with trusted local tools.
 
-When you are done using the bridge, quit Codex Desktop and relaunch it normally.
+When you are done using the bridge, quit ChatGPT and relaunch it normally.
